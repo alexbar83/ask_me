@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AskMe</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    
+      <div class='wrapper'>
+        <% if flash[:notice].present? %> 
+    <p class="mb mt message message-notice"><%= flash[:notice] %></p>
+    <% end %>
+        <div class="navbar">
+        <p class="title-sm text-bold"><%= link_to "Ask_me!", root_path %></p>
+        
+        <div>
+          <% if current_user.present? %> 
+          <%= content_tag 'span',"@#{current_user.nickname}" %> 
+          <%= button_to "Выйти", session_path, method: :delete %>
+          <% else %>
+          <%= link_to "Регистрация", new_user_path , class: "button button-yelow" %> 
+          <%= link_to "Вход", new_session_path, class: "button button-yelow" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= yield %>
+    
+  </body>
+</html>
